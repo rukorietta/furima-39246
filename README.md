@@ -16,8 +16,8 @@
 
 ### Association
 
-- has_many :items, dependent: :destroy
-- has_many :purchases, dependent: :destroy
+- has_many :items
+- has_many :purchases
 
 ## items テーブル
 
@@ -36,7 +36,7 @@
 ### Association
 
 - belongs_to :user
-- has_one :purchases, dependent: :destroy
+- has_one :purchase
 
 ## purchases テーブル
 
