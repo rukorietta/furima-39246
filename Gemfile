@@ -65,3 +65,5 @@ end
 
 gem 'devise'
 gem 'faker'
+gem 'faker-japanese'
+gem"gimei"
