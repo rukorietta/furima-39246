@@ -7,6 +7,7 @@ FactoryBot.define do
     end
     email { Faker::Internet.unique.email }
     password { 'itti12' }
+    password_confirmation { 'itti12' } # ここを追加
     first_name { person.first.kanji.mb_chars }
     last_name { person.last.kanji.mb_chars }
     first_name_kana { person.first.katakana.mb_chars }
