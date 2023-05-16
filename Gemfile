@@ -66,4 +66,7 @@ end
 gem 'devise'
 gem 'faker'
 gem 'faker-japanese'
-gem"gimei"
+gem "gimei"
+gem 'activestorage'
+gem 'active_hash'
+gem 'pry'
