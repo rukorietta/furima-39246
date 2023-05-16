@@ -18,18 +18,17 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    unless @item.valid?
-      @item.item_imgs.new
-      render :new and return
+  
+    if @item.save
+      redirect_to root_path, notice: '商品を出品しました。'
+    else
+      render :new
     end
-
-    @item.save
-    redirect_to root_path
   end
 
   private
 
   def item_params
-    params.require(:item).permit(:item_name, :description, :category_id, :condition_id, :delivery_day_id, :delivery_fee_id, :prefecture_id, :user_id, :price, { images: [] })
+    params.require(:item).permit(:name, :description, :category_id, :condition_id, :delivery_day_id, :delivery_fee_id, :prefecture_id, :price, :image).merge(user_id: current_user.id)
   end
 end

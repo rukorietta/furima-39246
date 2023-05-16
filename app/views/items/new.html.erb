@@ -5,7 +5,7 @@
   </header>
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
-    <%= form_with url: items_path, local: true do |f| %>
+    <%= form_with url: items_path, local: true, scope: :item do |f| %>
 
     <% render 'shared/error_messages', model: f.object %>
 
@@ -39,7 +39,7 @@
         商品名
         <span class="indispensable">必須</span>
       </div>
-      <%= f.text_area :item_name, class:"items-text", id:"item-name", placeholder:"商品名（必須 40文字まで)", maxlength:"40" %>
+      <%= f.text_area :name, class:"items-text", id:"item-name", placeholder:"商品名（必須 40文字まで)", maxlength:"40" %>
       <div class="items-explain">
         <div class="weight-bold-text">
           商品の説明
@@ -58,12 +58,12 @@
           カテゴリー
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:category, Category.all, :id, :name, { prompt: '---選択してください---' }, { class: 'items-select', id: 'category-select' }) %>
+        <%= f.collection_select(:category_id, Category.all, :id, :name, { prompt: '---選択してください---' }, { class: 'items-select', id: 'category-select' }) %>
         <div class="weight-bold-text">
           商品の状態
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:condition, Condition.all, :id, :name, { prompt: '---選択してください---' }, {class:"select-box", id:"item-sales-status"}) %>
+        <%= f.collection_select(:condition_id, Condition.all, :id, :name, { prompt: '---選択してください---' }, {class:"select-box", id:"item-sales-status"}) %>
       </div>
     </div>
     <%# /商品の詳細 %>
@@ -84,7 +84,7 @@
           発送元の地域
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:prefecture, Prefecture.all, :id, :name, { prompt: '---選択してください---' }, {class:"select-box", id:"item-prefecture"}) %>
+        <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, { prompt: '---選択してください---' }, {class:"select-box", id:"item-prefecture"}) %>
         <div class="weight-bold-text">
           発送までの日数
           <span class="indispensable">必須</span>
