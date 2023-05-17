@@ -86,9 +86,9 @@ RSpec.describe Item, type: :model do
       end
 
       it 'ユーザーが紐づいていない場合出品できない' do
-        @item.user_id = nil
-        @item.valid?
-        expect(@item.errors.full_messages).to include("User must exist")
+        item = FactoryBot.build(:item, user_id: nil)
+        item.valid?
+        expect(item.errors.full_messages).to include("User must exist")
       end
     end
   end

@@ -17,6 +17,12 @@ class ItemsController < ApplicationController
   end
 
   def create
+    if current_user.nil?
+      flash.now[:alert] = 'ユーザーが紐づいていません。'
+      render :new
+      return
+    end
+    
     @item = Item.new(item_params)
   
     if @item.save
