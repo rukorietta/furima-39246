@@ -6,12 +6,6 @@ class ItemsController < ApplicationController
   end
   
   def new
-    # ログイン状態でない場合はログインページにリダイレクト
-    unless current_user
-      redirect_to new_user_session_path
-      return
-    end
-    
     # ログイン状態の場合は商品出品ページを表示
     @item = Item.new
   end
@@ -22,7 +16,7 @@ class ItemsController < ApplicationController
       render :new
       return
     end
-    
+
     @item = Item.new(item_params)
   
     if @item.save
