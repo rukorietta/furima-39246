@@ -1,6 +1,5 @@
 <%# <%= render "shared/header" %>
 
-<% @items.each do |item| %>
 <div class="item-show">
   <div class="item-box">
     <h2 class="name">
@@ -16,10 +15,10 @@
     </div>
     <div class="item-price-box">
       <span class="item-price">
-        ¥ <%= @item.price %>
+        <%# ¥ <%= @item.price %> 
       </span>
       <span class="item-postage">
-        <%= @item.delivery_fee_id %>
+        <%# <%= @item.delivery_fee_id %>
       </span>
     </div>
 
