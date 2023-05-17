@@ -13,4 +13,20 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :first_name, :last_name, :first_name_kana, :last_name_kana, :birth_date])
   end
+
+  def create
+    @item = Item.new(item_params)
+    if @item.save
+      # 販売手数料の計算
+      commission = (@item.price * 0.1).floor
+      # 販売利益の計算
+      profit = (@item.price - commission)
+      # ビューに渡すために、インスタンス変数に保存
+      @commission = commission
+      @profit = profit
+      render :show
+    else
+      render :new
+    end
+  end
 end
