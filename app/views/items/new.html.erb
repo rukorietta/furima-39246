@@ -5,20 +5,10 @@
   </header>
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
-    <%= form_with url: items_path, local: true, scope: :item do |f| %>
+    <%= form_with(url: items_path, local: true, scope: :item, model: :item) do |f| %>
 
-    <% render 'shared/error_messages', model: f.object %>
-
-     <% if @item.errors.any? %>
-        <div class="alert alert-danger">
-          <ul>
-            <% @item.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-     <% end %>
-
+    <%= render 'shared/error_messages', model: f.object %>
+    
     <%# 商品画像 %>
     <div class="img-upload">
       <div class="weight-bold-text">
