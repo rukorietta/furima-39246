@@ -2,6 +2,12 @@ class Item < ApplicationRecord
   has_one_attached :image
   belongs_to :user
 
+  # def sold_out?
+  #   # 売り切れているかどうかのロジックを記述する
+  #   # 例えば、在庫数が0の場合に売り切れと判定するなど
+  # end
+  
+
   validates :image, presence: true
   validates :name, presence: true
   validates :description, presence: true
@@ -35,4 +41,5 @@ class Item < ApplicationRecord
   def price_must_be_less_than_or_equal_to_9_999_999
     errors.add(:price, "は9,999,999円以下で設定してください") if price.present? && price > 9_999_999
   end
+
 end 
