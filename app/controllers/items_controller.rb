@@ -1,24 +1,18 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new]
+  before_action :authenticate_user!, only: [:new, :create] # create アクションもログイン状態でのアクセスを制限する
 
   def index
-    # @items = Item.all
+    @items = Item.all
   end
-  
+
   def new
     # ログイン状態の場合は商品出品ページを表示
     @item = Item.new
   end
 
   def create
-    if current_user.nil?
-      flash.now[:alert] = 'ユーザーが紐づいていません。'
-      render :new
-      return
-    end
+    @item = current_user.items.build(item_params) # ログインユーザーに紐づく商品を作成
 
-    @item = Item.new(item_params)
-  
     if @item.save
       redirect_to root_path, notice: '商品を出品しました。'
     else
@@ -29,6 +23,6 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :description, :category_id, :condition_id, :delivery_day_id, :delivery_fee_id, :prefecture_id, :price, :image).merge(user_id: current_user.id)
+    params.require(:item).permit(:name, :description, :category_id, :condition_id, :delivery_day_id, :delivery_fee_id, :prefecture_id, :price, :image)
   end
 end
