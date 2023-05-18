@@ -29,7 +29,7 @@
 | price              | integer     | null: false                   |
 | condition_id       | integer     | null: false                   |
 | category_id        | integer     | null: false                   |
-| delivery_fee_id    | integer     | null: false                   |
+| delivery_fee_id    | integer     | null: false                   | 
 | delivery_day_id    | integer     | null: false                   |
 | prefecture_id      | integer     | null: false                   |
 
