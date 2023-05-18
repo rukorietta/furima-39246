@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit] # create アクションもログイン状態でのアクセスを制限する
-  before_action :set_item, only: [:show, :update, :edit]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :destroy] # create アクションもログイン状態でのアクセスを制限する
+  before_action :set_item, only: [:show, :update, :edit, :destroy]
 
   def index
     @items = Item.order(created_at: :desc)
@@ -40,6 +40,15 @@ class ItemsController < ApplicationController
   
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def destroy
+    if current_user == @item.user
+      @item.destroy
+      redirect_to root_path, notice: '商品を削除しました。'
+    else
+      redirect_to root_path, alert: '他のユーザーの商品は削除できません。'
+    end
   end
 
   private
