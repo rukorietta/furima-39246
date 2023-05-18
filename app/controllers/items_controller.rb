@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create] # create アクションもログイン状態でのアクセスを制限する
+  before_action :authenticate_user!, only: [:new, :create, :edit] # create アクションもログイン状態でのアクセスを制限する
+  before_action :set_item, only: [:show, :update, :edit]
 
   def index
     @items = Item.order(created_at: :desc)
@@ -21,6 +22,23 @@ class ItemsController < ApplicationController
   end
 
   def show
+  end
+
+  def update
+    if @item.update(item_params)
+      redirect_to @item, notice: "商品情報が更新されました。"
+    else
+      render :edit
+    end
+  end
+
+  def edit
+     if @item.user != current_user
+       redirect_to root_path, alert: "他のユーザーの商品は編集できません。"
+     end
+  end
+  
+  def set_item
     @item = Item.find(params[:id])
   end
 
