@@ -24,6 +24,28 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  def update
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+      redirect_to @item, notice: "商品情報が更新されました。"
+    else
+      render :edit
+    end
+  end
+
+  def edit
+    @item = Item.find(params[:id])
+    if user_signed_in?
+      if @item.user == current_user
+        # 編集可能なユーザーの場合は通常通り編集ページを表示
+      else
+        redirect_to root_path, alert: "他のユーザーの商品は編集できません。"
+      end
+    else
+      redirect_to new_user_session_path, alert: "ログインが必要です。"
+    end
+  end
+
   private
 
   def item_params
