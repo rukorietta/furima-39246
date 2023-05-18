@@ -15,5 +15,4 @@ class Category < ActiveHash::Base
 
   include ActiveHash::Associations
   has_many :items
-  has_many :products, class_name: 'Product', foreign_key: 'category_id'
 end
