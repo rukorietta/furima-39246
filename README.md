@@ -65,4 +65,4 @@
 
 ### Association
 
-- belongs_to :purchase
+- belongs_to :purchase 
