@@ -7,6 +7,7 @@ class OrdersController < ApplicationController
 
   def create
     @order_form = OrderForm.new(order_params)
+    @item = Item.find(params[:item_id]) # @itemを適切に設定する
     if @order_form.save
       # 購入が成功した場合の処理
       redirect_to root_path, notice: '購入が完了しました。'
