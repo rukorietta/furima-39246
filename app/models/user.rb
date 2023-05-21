@@ -13,5 +13,4 @@ class User < ApplicationRecord
   validates :birth_date, presence: true      
 
   has_many :items, dependent: :destroy
-  has_many :orders, foreign_key: :buyer_id
 end
