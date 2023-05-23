@@ -70,3 +70,4 @@ gem "gimei"
 gem 'activestorage'
 gem 'active_hash'
 gem 'pry'
+gem 'payjp'

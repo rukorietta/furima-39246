@@ -58,13 +58,13 @@ ActiveRecord::Schema.define(version: 2023_05_21_070606) do
   end
 
   create_table "shippings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "order_id", null: false
-    t.string "postal_code"
-    t.integer "prefecture_id"
-    t.string "city"
-    t.string "address"
+    t.bigint "order_id", default: 0, null: false
+    t.string "postal_code", null: false
+    t.integer "prefecture_id", null: false
+    t.string "city", null: false
+    t.string "address", null: false
     t.string "building_name"
-    t.string "phone_number"
+    t.string "phone_number", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["order_id"], name: "index_shippings_on_order_id"
