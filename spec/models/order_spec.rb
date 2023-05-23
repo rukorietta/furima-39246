@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe OrderForm, type: :model do
   before do
-    
-    @order_form = FactoryBot.build(:order_form)
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.create(:item, user: @user)
+    @order_form = FactoryBot.build(:order_form, user_id: @user.id, item_id: @item.id)
   end
 
   describe '購入' do
@@ -67,7 +68,7 @@ RSpec.describe OrderForm, type: :model do
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include("Token can't be blank")
       end
-
+      
       it '電話番号に半角数字以外が含まれている場合は購入できない' do
         @order_form.phone_number = '090a1234567' # 半角数字以外が含まれている
         @order_form.valid?
