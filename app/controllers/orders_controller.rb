@@ -3,11 +3,20 @@ class OrdersController < ApplicationController
   def index
     @order_form = OrderForm.new
     @item = Item.find(params[:item_id]) if params[:item_id].present?
+
+    if !user_signed_in?
+      redirect_to new_user_session_path
+    elsif current_user.id == @item.user_id
+      redirect_to root_path
+    elsif @item.sold_out?
+      redirect_to root_path
+    end
   end
 
   def create
     @order_form = OrderForm.new(order_params)
     @item = Item.find(params[:item_id]) # @itemを適切に設定する
+
     if @order_form.valid?
       pay_item
       @order = create_order # @orderを作成する

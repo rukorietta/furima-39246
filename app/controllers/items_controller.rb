@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :destroy] # create アクションもログイン状態でのアクセスを制限する
   before_action :set_item, only: [:show, :update, :edit, :destroy]
+  before_action :check_sold_out_item, only: [:edit, :update]
 
   def index
     @items = Item.order(created_at: :desc)
@@ -22,10 +23,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
-    if @item.sold_out? && user_signed_in? && current_user.id != @item.user_id
-      redirect_to root_path
-    end
   end
 
   def update
@@ -52,6 +49,12 @@ class ItemsController < ApplicationController
       redirect_to root_path, notice: '商品を削除しました。'
     else
       redirect_to root_path, alert: '他のユーザーの商品は削除できません。'
+    end
+  end
+
+  def check_sold_out_item
+    if @item.sold_out? && current_user.id == @item.user_id
+      redirect_to root_path
     end
   end
 
