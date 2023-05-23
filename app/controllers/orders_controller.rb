@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_action :set_item, only: [:create]
+  before_action :set_order, only: [:create]
 
   def index
     @order_form = OrderForm.new
@@ -14,9 +16,6 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order_form = OrderForm.new(order_params)
-    @item = Item.find(params[:item_id]) # @itemを適切に設定する
-
     if @order_form.valid?
       pay_item
       @order = create_order # @orderを作成する
@@ -28,6 +27,13 @@ class OrdersController < ApplicationController
   end
 
   private
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
+  def set_order
+    @order_form = OrderForm.new(order_params)
+  end
 
   def create_shipping
     @shipping = Shipping.new(

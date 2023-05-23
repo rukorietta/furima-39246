@@ -1,10 +1,9 @@
 class Item < ApplicationRecord
   has_one_attached :image
   belongs_to :user
+  has_one :order
 
   def sold_out?
-    # 売り切れ判定のロジックを記述する
-    # 例：購入済みの注文が存在する場合に売り切れと判定する
     Order.exists?(item_id: id)
   end
 
