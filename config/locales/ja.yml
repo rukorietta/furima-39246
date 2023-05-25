@@ -1,0 +1,37 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        username: ニックネーム
+        first_name: 名前
+        last_name: 名字
+        first_name_kana: 名前(カナ)
+        last_name_kana: 名字(カナ)
+        birth_date: 誕生日
+        invalid: は6文字以上の半角英数字を使用してください
+      item:
+        image: 画像
+        name: 商品名
+        description: 商品の説明
+        price: 値段
+        category_id: カテゴリー
+        condition_id: 商品の状態
+        delivery_fee_id: 配送料の負担
+        prefecture_id: 発送元の地域
+        delivery_day_id: 発送までの日数
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              invalid: は半角英数字混合での入力が必須です
+  activemodel:
+    attributes:
+      order_form:
+        postal_code: 郵便番号
+        prefecture_id: 都道府県
+        city: 市区町村
+        address: 番地
+        phone_number: 電話番号
+        token: トークン
+    
