@@ -16,6 +16,8 @@ class ItemsController < ApplicationController
     @item = current_user.items.build(item_params) # ログインユーザーに紐づく商品を作成
 
     if @item.save
+      upload(params[:file])
+
       redirect_to root_path, notice: '商品を出品しました。'
     else
       render :new
@@ -62,5 +64,10 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:name, :description, :category_id, :condition_id, :delivery_day_id, :delivery_fee_id, :prefecture_id, :price, :image)
+  end
+
+  def upload(file)
+    # アップロード処理を実装する
+    # 例: アップロードされたファイルを保存するなどの処理を行う
   end
 end
