@@ -76,7 +76,6 @@ gem 'active_hash'
 gem 'pry'
 gem 'payjp'
 gem 'rails-i18n'
-gem 'date', '3.3.3'
 gem "aws-sdk-s3", require: false
 group :production do
   gem 'unicorn', '5.4.1'
